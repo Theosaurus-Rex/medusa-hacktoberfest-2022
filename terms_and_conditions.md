@@ -1,16 +1,17 @@
 ---
 layout: default
-title: "Home"
+title: "Terms & Conditions"
+permalink: /terms-and-conditions/
 ---
 
 <div class="py-24 max-w-xl mx-auto text-center">
   <h1 class="text-xl mb-12">
     <span class="text-4xl block">
-      Home
+      Terms & Conditions
     </span>
 
     <span class="uppercase font-light">
-      Store landing page will go here.
+      Template for store T&C will live here.
     </span>
 
   </h1>
