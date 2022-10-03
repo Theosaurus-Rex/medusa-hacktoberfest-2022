@@ -13,3 +13,9 @@ exclude:
   - postcss.config.js
   - tailwind.config.js
   - yarn.lock
+
+jekyll-medusa:
+  medusaApiUrl: 'http://localhost:9000'
+  medusaEndpoints:
+    store:
+      get:  ['products', 'collections'] # 'variants', 'regions', 'shipping-options'
