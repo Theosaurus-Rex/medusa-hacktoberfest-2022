@@ -18,8 +18,8 @@ module JekyllMedusa
 "const Medusa = require('@medusajs/medusa-js').default
 
 window.medusaAPI = new Medusa({
-  baseUrl: \"#{config['medusaApiUrl']}\",
-  maxRetries: #{config['maxRetries']}
+baseUrl: \"#{config['medusaApiUrl']}\",
+maxRetries: #{config['maxRetries']}
 })
 ")
       helperFile.close
