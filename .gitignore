@@ -1,4 +1,5 @@
 _site/
+_data/generated/
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata

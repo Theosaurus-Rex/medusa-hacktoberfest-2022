@@ -16,3 +16,6 @@ exclude:
 
 jekyll-medusa:
   medusaApiUrl: 'http://localhost:9000'
+  medusaEndpoints:
+    store:
+      get:  ['products', 'collections'] # 'variants', 'regions', 'shipping-options'
