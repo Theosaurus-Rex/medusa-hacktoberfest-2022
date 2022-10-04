@@ -3,16 +3,4 @@ layout: default
 title: "Home"
 ---
 
-<div class="py-24 max-w-xl mx-auto text-center">
-  <h1 class="text-xl mb-12">
-    <span class="text-4xl block">
-      Home
-    </span>
-
-    <span class="uppercase font-light">
-      Store landing page will go here.
-    </span>
-
-  </h1>
-
-</div>
+{% include navbar.html %}
