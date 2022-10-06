@@ -34,6 +34,8 @@ permalink: /products/
     <p>Stock: <span x-html="(await products)['{{ product.id }}'].variantsById['{{ variant.id }}'].inventory_quantity"></span></p>
   </template>
 
+  {% include button.html button_name="Add to cart" button_classes="px-4 py-2 rounded-md bg-purple-500 text-white hover:bg-purple-700 w-fit" %}
+
 {% for price in variant.prices %}
   <p>{{ price.amount }} {{ price.currency_code }}</p>
 {% endfor %}
