@@ -1,0 +1,11 @@
+<button type="button"
+  x-on:click="
+    medusaAPI.carts.lineItems.create(localStorage.getItem('cart_id'), {
+      variant_id: '{{include.variant_id}}',
+      quantity: 1
+    })
+  "
+  class="btn {{include.button_classes}} active"
+>
+  {{include.button_name}}
+</button>
