@@ -2,6 +2,10 @@ url: ""
 baseurl: ""
 title: "Jekyllwind"
 
+collections:
+  pages:
+    output: true
+
 plugins:
   - jekyll-postcss
 
