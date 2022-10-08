@@ -4,7 +4,6 @@ title: Products
 permalink: /products/
 ---
 
-<script src="/assets/js/medusajs.js"></script>
 <script>
   async function processProducts(products) {
     const productsById = {};
