@@ -1,0 +1,19 @@
+<script src="/assets/js/medusa-cart-promise.js"></script>
+<div class="cart">
+  <div class="cart-item" x-data="{ lineItems: cartPromise }">
+    <!-- NOTE: Each `template` must contain only one parent element (like in react) -->
+    <template x-if="await lineItems">
+      <div>
+        <template x-for="item in (await lineItems)">
+          <span>
+            <h4 x-text="item.title"></h4>
+            <img x-bind:src="item.thumbnail" alt="item.title" style="width: 100px">
+            <p>Size: <span x-text="item.description"></span></p>
+            <p>Quantity: <span x-text="item.quantity"></span></p>
+          </span>
+        </template>
+      </div>
+    </template>
+  </div>
+</div>
+<script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
