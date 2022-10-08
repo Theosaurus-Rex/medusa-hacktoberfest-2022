@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/assets/js/medusajs.js"></script>
+  <script src="/assets/js/medusa-create-cart.js"></script>
+  <script>
+    const cartPromise = medusaAPI.carts.retrieve(localStorage.getItem('cart_id'))
+      .then(({ cart }) => {
+        const lineItems = [];
+        cart.items.forEach(item => {
+          lineItems.push(item);
+        });
+        return lineItems;
+      });
+  </script>
+  <title>Document</title>
+</head>
+<body>
+  <div class="cart">
+    <div class="cart-item" x-data="{ lineItems: cartPromise }">
+      <!-- NOTE: Each `template` must contain only one parent element (like in react) -->
+      <template x-if="await lineItems">
+        <div>
+          <template x-for="item in (await lineItems)">
+            <span>
+              <h4 x-text="item.title"></h4>
+              <img x-bind:src="item.thumbnail" alt="item.title" style="width: 100px">
+              <p>Size: <span x-text="item.description"></span></p>
+              <p>Quantity: <span x-text="item.quantity"></span></p>
+            </span>
+          </template>
+        </div>
+      </template>
+    </div>
+  </div>
+  <script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
+</body>
+</html>
