@@ -6,7 +6,7 @@
       <div>
         <template x-for="item in (await lineItems)">
           <span>
-            <h4 x-text="item.title"></h4>
+            <h4 x-text="item.title" class="bg-purple-500 text-white w-fit px-4 py-2 mt-4"></h4>
             <img x-bind:src="item.thumbnail" alt="item.title" style="width: 100px">
             <p>Size: <span x-text="item.description"></span></p>
             <p>Quantity: <span x-text="item.quantity"></span></p>
