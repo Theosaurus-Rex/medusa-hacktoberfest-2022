@@ -4,7 +4,6 @@ title: Products
 permalink: /products/
 ---
 
-<script src="/assets/js/medusajs.js"></script>
 <script>
   async function processProducts(products) {
     const productsById = {};
@@ -33,6 +32,14 @@ permalink: /products/
   <template x-if="await products">
     <p>Stock: <span x-html="(await products)['{{ product.id }}'].variantsById['{{ variant.id }}'].inventory_quantity"></span></p>
   </template>
+
+  {%
+    include add_to_cart_button.html button_name="Add to cart"
+
+    button_classes="px-4 py-2 rounded-md bg-purple-500 text-white hover:bg-purple-700 w-fit"
+
+    variant_id=variant.id
+  %}
 
 {% for price in variant.prices %}
   <p>{{ price.amount }} {{ price.currency_code }}</p>
