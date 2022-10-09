@@ -9,7 +9,35 @@
             <h4 x-text="item.title" class="bg-purple-500 text-white w-fit px-4 py-2 mt-4"></h4>
             <img x-bind:src="item.thumbnail" alt="item.title" style="width: 100px">
             <p>Size: <span x-text="item.description"></span></p>
-            <p>Quantity: <span x-text="item.quantity"></span></p>
+
+            <!-- FIXME: spamming the button produces errors and the visual update is laggy -->
+            <span x-data="{ qty: item.quantity }">
+              <button type="button"
+              x-on:click="
+                medusaAPI.carts.lineItems.update(localStorage.getItem('cart_id'), item.id, {
+                  quantity: qty - 1
+                }).then(() => {
+                  qty -= 1
+                })
+              "
+              class="btn px-4 py-2 rounded-md bg-purple-500 text-white hover:bg-purple-700 w-fit active"
+              >
+                -
+              </button>
+              <span x-text="qty"></span>
+              <button type="button"
+              x-on:click="
+                medusaAPI.carts.lineItems.update(localStorage.getItem('cart_id'), item.id, {
+                  quantity: qty + 1
+                }).then(() => {
+                  qty += 1
+                })
+              "
+              class="btn px-4 py-2 rounded-md bg-purple-500 text-white hover:bg-purple-700 w-fit active"
+              >
+                +
+              </button>
+            </span>
           </span>
         </template>
       </div>

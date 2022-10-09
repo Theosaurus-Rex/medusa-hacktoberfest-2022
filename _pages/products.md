@@ -4,27 +4,14 @@ title: Products
 permalink: /products/
 ---
 
-<script>
-  async function processProducts(products) {
-    const productsById = {};
-    for (const product of (await products).products) {
-      productsById[product.id] = product;
-
-      product.variantsById = {};
-      for (const variant of product.variants) {
-        product.variantsById[variant.id] = variant;
-      }
-    }
-    return productsById;
-  }
-</script>
+<script src="/assets/js/medusa-process-products.js"></script>
 
 {% include navbar.html %}
 
 <div class="flex" x-data="{ products: processProducts(medusaAPI.products.list()) }">
 {% for product in site.data.generated.products.products %}
 
-<div class="flex flex-col">
+<div>
 <h1>{{ product.title }}</h1>
 <p>{{ product.description }}</p>
 
