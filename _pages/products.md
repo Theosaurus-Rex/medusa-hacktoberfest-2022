@@ -11,7 +11,7 @@ permalink: /products/
 <div class="flex" x-data="{ products: processProducts(medusaAPI.products.list()) }">
 {% for product in site.data.generated.products.products %}
 
-<div class="flex flex-col">
+<div>
 <h1>{{ product.title }}</h1>
 <p>{{ product.description }}</p>
 
