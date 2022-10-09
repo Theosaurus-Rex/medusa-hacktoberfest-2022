@@ -11,3 +11,5 @@ gem "pry", "~> 0.14.0"
 group :jekyll_plugins do
   gem "liquid-pry"
 end
+
+gem "jekyll-datapage-generator", "~> 1.4"

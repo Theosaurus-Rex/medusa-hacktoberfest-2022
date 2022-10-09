@@ -12,7 +12,10 @@ permalink: /products/
 {% for product in site.data.generated.products.products %}
 
 <div>
-<h1>{{ product.title }}</h1>
+<a href="/products/{{ product.handle }}">
+  <h1>{{ product.title }}</h1>
+  <img src="{{ product.thumbnail }}" alt="{{ product.title }}" style="width: 100px">
+</a>
 <p>{{ product.description }}</p>
 
 {% for variant in product.variants %}
@@ -34,6 +37,7 @@ permalink: /products/
   <p>{{ price.amount }} {{ price.currency_code }}</p>
 {% endfor %}
 {% endfor %}
+<button class="bg-black-500" onclick="/products/{{ product.handle }}">Read more</button>
 </div>
 {% endfor %}
 </div>
