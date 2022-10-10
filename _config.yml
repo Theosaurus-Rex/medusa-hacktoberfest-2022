@@ -6,8 +6,31 @@ collections:
   pages:
     output: true
 
+defaults:
+  -
+    scope:
+      path: ""
+      type: pages
+    values:
+      layout: "default"
+  -
+    scope:
+      type: products
+    values:
+      layout: product
+      permalink: products/:product/
+
 plugins:
   - jekyll-postcss
+  - jekyll-datapage-generator # https://github.com/avillafiorita/jekyll-datapage_gen
+
+page_gen-dirs: true
+
+page_gen:
+  - data: 'generated.products.products'
+    template: 'product'
+    name: 'handle'
+    dir: 'products'
 
 postcss:
   cache: false

@@ -1,0 +1,31 @@
+---
+layout: default
+---
+
+<!-- variables available include {{page.name}} (the name of the file) and
+  anything available in the "product" object - just replace "product" with "page"
+  e.g. {{page.title}} renders "product.title"
+-->
+<h1>{{ page.title }}</h1>
+
+<img src="{{ page.thumbnail }}" alt="{{ page.title }}" style="width: 100px">
+
+<p>{{ page.description }}</p>
+
+{% for variant in page.variants %}
+
+  <h4>{{ variant.title }}</h4>
+{% for price in variant.prices %}
+  <p>{{ price.amount }} {{ price.currency_code }}</p>
+{% endfor %}
+
+  {%
+    include add_to_cart_button.html button_name="Add to cart"
+
+    button_classes="px-4 py-2 rounded-md bg-purple-500 text-white hover:bg-purple-700 w-fit"
+
+    variant_id=variant.id
+  %}
+
+{% endfor %}
+<script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
