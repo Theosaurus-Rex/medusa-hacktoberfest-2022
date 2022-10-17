@@ -6,8 +6,6 @@ permalink: /products/
 
 <script src="/assets/js/medusa-process-products.js"></script>
 
-{% include navbar.html %}
-
 <div class="flex" x-data="{ products: processProducts(medusaAPI.products.list()) }">
 {% for product in site.data.generated.products.products %}
 
