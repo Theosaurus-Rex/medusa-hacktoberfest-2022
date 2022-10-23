@@ -1,53 +1,161 @@
 <script src="/assets/js/medusa-cart-promise.js"></script>
-<div class="cart">
-  <div class="cart-item" x-data="{ lineItems: cartPromise }">
+<div class="container p-8 mx-auto mt-12 cart">
+  <div class="cart-item" x-data="{ lineItems: lineItems }">
     <!-- NOTE: Each `template` must contain only one parent element (like in react) -->
     <template x-if="await lineItems">
-      <div>
-        <template x-for="item in (await lineItems)">
-          <span>
-            <h4 x-text="item.title" class="bg-purple-500 text-white w-fit px-4 py-2 mt-4"></h4>
-            <button type="button" x-on:click="
-              medusaAPI.carts.lineItems.delete(localStorage.getItem('cart_id'), item.id)
-              .then(() => {
-                location.reload();
-              })
-            ">
-              Remove
-            </button>
-            <img x-bind:src="item.thumbnail" alt="item.title" style="width: 100px">
-            <p>Size: <span x-text="item.description"></span></p>
-
-            <!-- FIXME: spamming the button produces errors and the visual update is laggy -->
-            <span x-data="{ qty: item.quantity }">
-              <button type="button"
-              x-on:click="
-                medusaAPI.carts.lineItems.update(localStorage.getItem('cart_id'), item.id, {
-                  quantity: qty - 1
-                }).then(() => {
-                  qty -= 1
-                })
-              "
-              class="btn px-4 py-2 rounded-md bg-purple-500 text-white hover:bg-purple-700 w-fit active"
-              >
-                -
-              </button>
-              <span x-text="qty"></span>
-              <button type="button"
-              x-on:click="
-                medusaAPI.carts.lineItems.update(localStorage.getItem('cart_id'), item.id, {
-                  quantity: qty + 1
-                }).then(() => {
-                  qty += 1
-                })
-              "
-              class="btn px-4 py-2 rounded-md bg-purple-500 text-white hover:bg-purple-700 w-fit active"
-              >
-                +
-              </button>
-            </span>
-          </span>
-        </template>
+      <div class="w-full overflow-x-auto">
+        <table class="w-full shadow-inner">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="px-6 py-3 font-bold whitespace-nowrap">Image</th>
+              <th class="px-6 py-3 font-bold whitespace-nowrap">Product</th>
+              <th class="px-6 py-3 font-bold whitespace-nowrap">Qty</th>
+              <th class="px-6 py-3 font-bold whitespace-nowrap">Price</th>
+              <th class="px-6 py-3 font-bold whitespace-nowrap">Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <template x-for="item in (await lineItems)">
+            <tr>
+              <td>
+                <div class="flex justify-center">
+                  <img
+                    x-bind:src="item.thumbnail"
+                    class="object-cover h-28 w-28 rounded-2xl"
+                    alt="item.title"
+                  />
+                </div>
+              </td>
+              <td class="p-4 px-6 text-center whitespace-nowrap">
+                <div class="flex flex-col items-center justify-center">
+                  <h3 x-text="item.title"></h3>
+                </div>
+              </td>
+              <td class="p-4 px-6 text-center whitespace-nowrap">
+                <div x-data="{ qty: item.quantity }">
+                  <button x-on:click="
+                    medusaAPI.carts.lineItems.update(localStorage.getItem('cart_id'), item.id, {
+                      quantity: qty - 1
+                    }).then(() => {
+                      qty -= 1
+                    }).then(() => {
+                      location.reload();
+                    })
+                  ">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="inline-flex w-6 h-6 text-red-600"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </button>
+                  <input
+                    type="text"
+                    name="qty"
+                    x-bind:value="qty"
+                    class="w-12 text-center bg-gray-100 outline-none"
+                  />
+                  <button x-on:click="
+                    medusaAPI.carts.lineItems.update(localStorage.getItem('cart_id'), item.id, {
+                      quantity: qty + 1
+                    }).then(() => {
+                      qty += 1
+                    }).then(() => {
+                      location.reload();
+                    })
+                  ">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="inline-flex w-6 h-6 text-green-600"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </td>
+              <td class="p-4 px-6 text-center whitespace-nowrap" x-text="'$' + item.total/100"></td>
+              <td class="p-4 px-6 text-center whitespace-nowrap">
+                <button x-on:click="
+                  medusaAPI.carts.lineItems.delete(localStorage.getItem('cart_id'), item.id)
+                  .then(() => {
+                    location.reload();
+                  })
+                ">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-6 h-6 text-red-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                    />
+                  </svg>
+                </button>
+              </td>
+            </tr>
+            </template>
+          </tbody>
+        </table>
+        <div class="cart-item" x-data="{ cartTotal: cartTotal }">
+          <!-- NOTE: Each `template` must contain only one parent element (like in react) -->
+          <template x-if="await cartTotal">
+            <div class="mt-4">
+              <div class="py-4 rounded-md shadow">
+                <h3 class="text-xl font-bold text-blue-600">Order Summary</h3>
+                <div
+                  class="
+                    flex
+                    items-center
+                    justify-between
+                    px-4
+                    py-2
+                    mt-3
+                    border-t-2
+                  "
+                >
+                  <span class="text-xl font-bold">Total</span>
+                  <span class="text-2xl font-bold" x-text="'$'+(await cartTotal)/100"></span>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+        <div class="mt-4">
+          <button
+            class="
+              w-full
+              py-2
+              text-center text-white
+              bg-blue-500
+              rounded-md
+              shadow
+              hover:bg-blue-600
+            "
+          >
+            Proceed to Checkout
+          </button>
+        </div>
       </div>
     </template>
   </div>

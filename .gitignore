@@ -1,5 +1,5 @@
 _site/
-_data/generated/
+_data/generated/*.json
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata
