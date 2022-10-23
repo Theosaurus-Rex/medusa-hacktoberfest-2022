@@ -1,6 +1,6 @@
 # Medusa Jekyll Starter Template
 
-![Medusa Jekyll Starter Template](docs/cover-template.jpg)
+![Medusa Jekyll Starter Template](./docs/cover-template.jpg)
 
 ## About
 ### Participants
@@ -21,7 +21,7 @@ NOTE: Some features are a work in progress.
 
 ### Preview
 
-![Medusa Jekyll Starter Template](docs/medusa-jekyll.gif)
+![Medusa Jekyll Starter Template](./docs/medusa-jekyll.gif)
 
 ## Set up Project
 
